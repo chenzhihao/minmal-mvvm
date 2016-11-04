@@ -14,16 +14,15 @@ Observer.prototype.defineReactive = function (obj, key, val, cb) {
     enumerable: true,
     configurable: true,
     get: function () {
-      console.log('Access: ' + key);
       return val;
     },
     set: function (newVal) {
       console.log('Config on: ' + key + ', old value: ' + val);
       console.log('New: ' + key + ' : ' + newVal);
       if (newVal === val) return;
-      cb(val, newVal);
       val = newVal;
       reactify(val, cb);
+      cb(val, newVal);
     }
   });
 };
